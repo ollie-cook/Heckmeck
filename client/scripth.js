@@ -194,6 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 counter: counter,
                 tileId: tileId,
                 pile1: pile1,
+                grid1pics: grid1pics,
               });
               finish();
             } else {
@@ -221,6 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 counter: counter,
                 pile2: pile2,
                 tileId: tileId,
+                grid1pics: grid1pics,
               });
               finish();
             } else {
@@ -250,6 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var pile1 = data.pile1;
     var pile2 = data.pile2;
     var counter = data.counter;
+    var grid1pics = data.grid1pics
     console.log("running");
     if (counter % 2 !== 0) {
       console.log(grid1pics)
