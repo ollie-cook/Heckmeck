@@ -252,6 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var counter = data.counter;
     console.log("running");
     if (counter % 2 !== 0) {
+      console.log(grid1pics)
       grid1pics[tileId].setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png");
       var piles1 = pileOne.querySelectorAll("img");
       piles1[0].setAttribute("src", pile1[pile1.length - 1].img);
