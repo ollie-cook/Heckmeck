@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Heckmeck</title>
+    <link href="client/styleh.css" rel="stylesheet"  />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap"
+      rel="stylesheet"
+    />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="client/scripth.js"></script>
+  </head>
+  <body>
+    <h1>Heckmeck</h1>
+    <!--button class="flip" onclick="sign()">Flip Tile</button>-->
+    <div class="grid1"></div>
+    <br />
+    <div class="score1">
+      <p class="score1text">Bank Total:</p>
+      <p id="score1number" class="score1number">0</p>
+    </div>
+    <div class="bank1 row2 diceRow"></div>
+    <div class="diceRoll row2 diceRow"></div>
+    <div class="bank2 row2"></div>
+    <div class="score2">
+      <p class="score1text">Bank Total:</p>
+      <p id="score2number" class="score1number">0</p>
+    </div>
+
+    <br/>
+
+    <div class="player1 row2"></div>
+
+    <div>
+      <button class="roll row2" onclick="roll()">ROLL</button>
+      <br />
+      <br />
+      <!--<button class="roll row2" onclick="finish()">Finish Go</button>
+      <br /><br />-->
+      <button class="roll row2" onclick="signTwo()">Steal tile</button>
+      <br /><br />
+      <button class="roll row2" onclick="finishGame()">Finish game</button>
+    </div>
+    <div class="player2 row2"></div>
+
+  </body>
+</html>
