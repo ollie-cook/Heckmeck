@@ -213,10 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (bankTotal2 >= tileArray[tileId].number) {
             if (bank2.includes(diceArray[5])) {
               pile2.push(tileArray[tileId]);
-<<<<<<< HEAD
               this.setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png");
-=======
->>>>>>> ad02b7cd2edd92eb0eef2b2daed7350e8e290c99
               returnChecker = 1;
               socket.emit("bankTile", {
                 counter: counter,
@@ -260,10 +257,6 @@ document.addEventListener("DOMContentLoaded", () => {
       piles1[0].addEventListener("click", returnSteal);
       piles1[0].setAttribute("class", "tile1");
     } else { 
-<<<<<<< HEAD
-=======
-      this.setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png");
->>>>>>> ad02b7cd2edd92eb0eef2b2daed7350e8e290c99
       var piles2 = pileTwo.querySelectorAll("img");
       piles2[0].setAttribute("src", pile2[pile2.length - 1].img);
       piles2[0].setAttribute("data-id", tileId);
