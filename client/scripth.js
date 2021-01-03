@@ -194,7 +194,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 counter: counter,
                 tileId: tileId,
                 pile1: pile1,
-                grid1pics: grid1pics,
               });
               finish();
             } else {
@@ -222,7 +221,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 counter: counter,
                 pile2: pile2,
                 tileId: tileId,
-                grid1pics: grid1pics,
               });
               finish();
             } else {
@@ -252,18 +250,18 @@ document.addEventListener("DOMContentLoaded", () => {
     var pile1 = data.pile1;
     var pile2 = data.pile2;
     var counter = data.counter;
-    var grid1pics = data.grid1pics
+    var gridOne = grid1.querySelectorAll("img");
+    console.log(gridOne)
     console.log("running");
     if (counter % 2 !== 0) {
-      console.log(grid1pics)
-      grid1pics[tileId].setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png");
+      gridOne[tileId].setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png");
       var piles1 = pileOne.querySelectorAll("img");
       piles1[0].setAttribute("src", pile1[pile1.length - 1].img);
       piles1[0].setAttribute("data-id", tileId);
       piles1[0].addEventListener("click", returnSteal);
       piles1[0].setAttribute("class", "tile1");
     } else { 
-      grid1pics[tileId].setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png");
+      gridOne[tileId].setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png");
       var piles2 = pileTwo.querySelectorAll("img");
       piles2[0].setAttribute("src", pile2[pile2.length - 1].img);
       piles2[0].setAttribute("data-id", tileId);
