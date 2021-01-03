@@ -186,6 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (bankTotal1 >= tileArray[tileId].number) {
             if (bank1.includes(diceArray[5])) {
               //This is what happens if the bank total is high enough and they have banked a worm.
+              pile1.push(tileArray[tileId]);
               returnChecker = 1;
               socket.emit("bankTile", {
                 counter: counter,
@@ -211,6 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (rollCounter === bank2[bank2.length - 1].roll) {
           if (bankTotal2 >= tileArray[tileId].number) {
             if (bank2.includes(diceArray[5])) {
+              pile2.push(tileArray[tileId]);
               returnChecker = 1;
               socket.emit("bankTile", {
                 counter: counter,
@@ -247,7 +249,6 @@ document.addEventListener("DOMContentLoaded", () => {
     var counter = data.counter;
     console.log("running");
     if (counter % 2 !== 0) {
-      pile1.push(tileArray[tileId]);
       this.setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png");
       var piles1 = pileOne.querySelectorAll("img");
       piles1[0].setAttribute("src", pile1[pile1.length - 1].img);
@@ -255,7 +256,6 @@ document.addEventListener("DOMContentLoaded", () => {
       piles1[0].addEventListener("click", returnSteal);
       piles1[0].setAttribute("class", "tile1");
     } else { 
-      pile2.push(tileArray[tileId]);
       this.setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png");
       var piles2 = pileTwo.querySelectorAll("img");
       piles2[0].setAttribute("src", pile2[pile2.length - 1].img);
