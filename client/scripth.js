@@ -215,7 +215,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (bank2.includes(diceArray[5])) {
               pile2.push(tileArray[tileId]);
               this.setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png");
-
               returnChecker = 1;
               socket.emit("bankTile", {
                 counter: counter,
@@ -257,7 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
       piles1[0].setAttribute("data-id", tileId);
       piles1[0].addEventListener("click", returnSteal);
       piles1[0].setAttribute("class", "tile1");
-    } else {
+    } else { 
       var piles2 = pileTwo.querySelectorAll("img");
       piles2[0].setAttribute("src", pile2[pile2.length - 1].img);
       piles2[0].setAttribute("data-id", tileId);
@@ -353,8 +352,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     finish();
   }
-
-
 });
 
 const diceArray = [
