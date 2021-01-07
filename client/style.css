@@ -1,0 +1,194 @@
+body {
+  background-color: #00bfff;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
+#top {
+  position: relative;
+  display: block;
+  height: 30vh;
+}
+
+#top-tiles {
+  position: relative;
+  display: inline-block;
+  top: 25%;
+  left: 2%;
+}
+
+.tile {
+  position: relative;
+  width: 5.5vw;
+  margin: 0 0.5vw 0 0;
+}
+
+#middle {
+  position: relative;
+  display: block;
+  height: 40vh;
+}
+
+.middle-block {
+  position: relative;
+  display: inline-block;
+  width: 19.7vw;
+  margin: 0 0 0 0;
+  z-index: 3;
+  overflow: hidden;
+}
+
+.bank-block {
+  height: 40vh;
+}
+
+.bank {
+  position: relative;
+  display: inline-flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 52%;
+  left: 24%;
+  overflow: hidden;
+}
+
+.dice-div {
+  position: relative;
+  display: inline-block;
+  width: 3vw;
+  height: 3vw;
+  margin: 0.6vw 1vw 1.4vw 1vw;
+}
+
+.dice {
+  position: relative;
+  width: 3vw;
+}
+
+#bottom {
+  position: relative;
+  display: block;
+  height: 30vh;
+}
+
+.score-block {
+  flex-wrap: wrap;
+  z-index: 1;
+  height: 40vh;
+}
+
+.score-right {
+  float: right;
+}
+
+.score {
+  position: relative;
+  top: 25%;
+  height: 50%;
+  width: auto;
+}
+
+.score-text {
+  text-align: center;
+  font-family: "Chelsea Market";
+}
+.score-number {
+  position: relative;
+  bottom: 10vh;
+  font-size: 10vh;
+  text-align: center;
+  font-family: "Chelsea Market";
+}
+.score1numberred {
+  margin: 0 0 0 7%;
+  font-size: 80px;
+  font-family: "Chelsea Market";
+  color: red;
+}
+
+.bottom-block {
+  position: relative;
+  display: inline-block;
+  height: 30vh;
+}
+
+.pile-block {
+  width: 36.8vw;
+}
+
+.right-pile-block {
+  float: right;
+}
+
+.tile-block {
+  position: relative;
+  height: 90%;
+  width: 8vw;
+  background-color: darkgoldenrod;
+  z-index: 1;
+}
+
+#tile-right {
+  float: right;
+  right: 70%;
+}
+
+#tile-left {
+  left: 70%;
+}
+
+.button-block {
+  width: 25vw;
+  overflow: hidden;
+}
+
+.buttons {
+  position: relative;
+  display: block;
+  width: 80%;
+  height: 70%;
+  top: 15%;
+  left: 10%;
+  overflow: hidden;
+}
+
+.roll {
+  position: relative;
+  top: 20%;
+  left: 25%;
+  border: solid 3px;
+  border-radius: 5px;
+  background-color: CadetBlue;
+  width: 10vw;
+  font-family: "Chelsea Market";
+}
+
+/*Everything below this point is used in the js script. Above is used in html.*/
+
+.tile1 {
+  width: 100%;
+}
+
+.flip {
+  position: relative;
+  top: -70px;
+  float: right;
+  border: solid 3px;
+  border-radius: 5px;
+  background-color: CadetBlue;
+  width: 10%;
+  font-family: "Chelsea Market";
+  margin: 0 15% 2% 0;
+}
+
+.player2 {
+  width: 5%;
+  position: relative;
+  top: -250px;
+  margin: 0 20% 0 20%;
+  float: right;
+}
+
+.player1 {
+  width: 5%;
+}

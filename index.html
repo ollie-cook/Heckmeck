@@ -2,47 +2,56 @@
 <html>
   <head>
     <title>Heckmeck</title>
-    <link href="client/styleh.css" rel="stylesheet"  />
+    <link href="client/style.css" rel="stylesheet"  />
     <link
       href="https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap"
       rel="stylesheet"
     />
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="client/scripth.js"></script>
+    <script src="client/script.js"></script>
   </head>
   <body>
-    <h1>Heckmeck</h1>
-    <!--button class="flip" onclick="sign()">Flip Tile</button>-->
-    <div class="grid1"></div>
-    <br />
-    <div class="score1">
-      <p class="score1text">Bank Total:</p>
-      <p id="score1number" class="score1number">0</p>
-    </div>
-    <div class="bank1 row2 diceRow"></div>
-    <div class="diceRoll row2 diceRow"></div>
-    <div class="bank2 row2"></div>
-    <div class="score2">
-      <p class="score1text">Bank Total:</p>
-      <p id="score2number" class="score1number">0</p>
+    <div id="top">
+      <div id="top-tiles"></div>
     </div>
 
-    <br/>
-
-    <div class="player1 row2"></div>
-
-    <div>
-      <button class="roll row2" onclick="roll()">ROLL</button>
-      <br />
-      <br />
-      <!--<button class="roll row2" onclick="finish()">Finish Go</button>
-      <br /><br />-->
-      <button class="roll row2" onclick="signTwo()">Steal tile</button>
-      <br /><br />
-      <button class="roll row2" onclick="finishGame()">Finish game</button>
+    <div id="middle">
+      <div class="middle-block score-block">
+        <div class="score">
+          <p class="score-text">Bank Total:</p>
+          <p id="score1number" class="score-number">0</p>
+        </div>
+      </div><div class="middle-block bank-block">
+        <div id="bank-left" class = "bank"></div>
+      </div><div class="middle-block bank-block">
+        <div id="bank-middle" class = "bank"></div>
+      </div><div class="middle-block bank-block">
+        <div id="bank-right" class = "bank"></div>
+      </div><div class="middle-block score-block score-right">
+        <div class="score">
+          <p class="score-text">Bank Total:</p>
+          <p id="score2number" class="score-number">0</p>
+        </div>
+      </div>
     </div>
-    <div class="player2 row2"></div>
-
+    
+    <div id="bottom">
+      <div class="bottom-block pile-block">
+        <div id="tile-left" class="tile-block"></div>
+      </div><div class="bottom-block button-block">
+        <div class="buttons">
+          <button class="roll" onclick="roll(8)">ROLL</button>
+          <br><br>
+        <!--<button class="roll row2" onclick="finish()">Finish Go</button>
+        <br /><br />-->
+          <button class="roll" onclick="moveDie(0,diceArray[0],7,5)">Steal tile</button>
+          <br><br>
+          <button class="roll">Finish game</button>
+        </div> 
+      </div><div class="bottom-block pile-block right-pile-block">
+        <div id="tile-right" class="tile-block"></div>
+      </div> 
+    </div>
   </body>
 </html>

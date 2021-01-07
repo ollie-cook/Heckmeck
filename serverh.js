@@ -22,17 +22,24 @@ io.on("connection", (socket) => {
   });
 
   socket.on("roll", function (data) {
-      var currentDice = data.currentDice; 
-      io.emit("rollreturn", {
-          currentDiceReturn: currentDice,
-      });
-  })
+    var dicesArray1 = data.dicesArray;
+    console.log(dicesArray1);
+    io.emit("rollreturn", {
+      dicesArray2: dicesArray1,
+    });
+  });
 
-  socket.on("moveDie", function (data) {
-    console.log("recieved moveDie");
-    var info = data.info;
-    io.emit("moveDieReturn", {
-      info:info,
-    })
-  })
+  socket.on("bankIt", function (data) {
+    io.emit("bankReturn", data);
+  });
+
+  socket.on("clearBank", function (data) {
+    io.emit("clearBankReturn", data);
+  });
+
+  socket.on("bankTile", function (data) {
+    var tileId = data.tileId;
+    console.log(tileId);
+    io.emit("bankTileReturn", data);
+  });
 });

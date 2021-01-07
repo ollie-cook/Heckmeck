@@ -179,7 +179,6 @@ document.addEventListener("DOMContentLoaded", () => {
       //signal checks if player has clicked "flip tile" button.
       //This is what happens if player has not clicked "flip tile" button.
       var tileId = this.getAttribute("data-id");
-      console.log(tileId);
       if (counter % 2 !== 0) {
         // counter%2 checks whos turn it is.
         //counter%2 !== 0 means it is player 1's turn.
@@ -188,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (bank1.includes(diceArray[5])) {
               //This is what happens if the bank total is high enough and they have banked a worm.
               pile1.push(tileArray[tileId]);
-              //this.setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png");
+              this.setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png");
               returnChecker = 1;
               socket.emit("bankTile", {
                 counter: counter,
@@ -215,7 +214,8 @@ document.addEventListener("DOMContentLoaded", () => {
           if (bankTotal2 >= tileArray[tileId].number) {
             if (bank2.includes(diceArray[5])) {
               pile2.push(tileArray[tileId]);
-              //this.setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png");
+              this.setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png");
+
               returnChecker = 1;
               socket.emit("bankTile", {
                 counter: counter,
@@ -250,18 +250,14 @@ document.addEventListener("DOMContentLoaded", () => {
     var pile1 = data.pile1;
     var pile2 = data.pile2;
     var counter = data.counter;
-    var gridOne = grid1.querySelectorAll("img");
-    console.log(gridOne)
     console.log("running");
     if (counter % 2 !== 0) {
-      gridOne[tileId].setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png");
       var piles1 = pileOne.querySelectorAll("img");
       piles1[0].setAttribute("src", pile1[pile1.length - 1].img);
       piles1[0].setAttribute("data-id", tileId);
       piles1[0].addEventListener("click", returnSteal);
       piles1[0].setAttribute("class", "tile1");
-    } else { 
-      gridOne[tileId].setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png");
+    } else {
       var piles2 = pileTwo.querySelectorAll("img");
       piles2[0].setAttribute("src", pile2[pile2.length - 1].img);
       piles2[0].setAttribute("data-id", tileId);
@@ -357,6 +353,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     finish();
   }
+
+
 });
 
 const diceArray = [
