@@ -99,11 +99,14 @@ document.addEventListener("DOMContentLoaded", () => {
     
     
     topTiles = document.getElementById("top-tiles");
-    pileOne = document.getElementById("tile-left");
-    pileTwo = document.getElementById("tile-right");
+    pileLeft = document.getElementById("tile-left");
+    pileRight = document.getElementById("tile-right");
     bankLeft = document.getElementById("bank-left");
     bankMiddle = document.getElementById("bank-middle");
     bankRight = document.getElementById("bank-right"); 
+    playerBanks = [bankLeft,bankRight];
+    playerPiles = [pileLeft,pileRight];
+    j=0;
 
 //Creates the line of tiles at top of page. 
 tileArray.forEach(element => { 
@@ -111,11 +114,12 @@ tileArray.forEach(element => {
    tile.setAttribute("src", element.img);
    topTiles.appendChild(tile);
    tile.setAttribute("class", "tile");
+   tile.setAttribute("data-id",j);
+   j++;
 })
 
-
 //Creates divs to put the pictures of dice into.
-banks = [bankLeft, bankMiddle, bankRight] 
+let banks = [bankLeft, bankMiddle, bankRight];
 const createBankDivs = (bank) => {
     for(let i=0; i<8; i++) {
         let div=document.createElement("div");   
@@ -126,7 +130,7 @@ const createBankDivs = (bank) => {
 }
 
 //Puts blue pictures into the divs. 
-const createBanks = (bank) => {
+const createBanks = (bank) => { 
     let divs = banks[bank].querySelectorAll("div");
     for(let i=0; i<8; i++) {
         let dice = document.createElement("img");
@@ -139,16 +143,29 @@ const createBanks = (bank) => {
 }
 
 //Calls the two above functions.
-for(let i=0;1<2;i++){
-    createBankDivs(i)
+for(let i=0;i<3;i++){
+    createBankDivs(i);
     createBanks(i);
+}
+
+
+const createPiles = (pile) => {
+  let pilePic = playerPiles[pile];
+  let pic=document.createElement("img");
+  pilePic.appendChild(pic);
+  pic.setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png")
+  pic.setAttribute("class","pile");
+}
+
+for(let i=0;i<2;i++) {
+  createPiles(i);
 }
 
 })
 
 const socket = io();
 let playerBank = [];
-let turn=0;
+let turn=0; 
 
 const diceArray = [
     {
@@ -220,9 +237,9 @@ socket.on("rollreturn", function (data) {
 
 //Does the mechanics of moving a die from the middle bank to one of the two players.
 //turn is 0 if it is player 1's go, or 1 if it is player 2's go.
-const moveDie = (turn, die, id, playerBankLength) => {
+const moveDie = (die, id, playerBankLength) => {
   socket.emit("moveDie", {
-    info: [die, id,playerBankLength],
+    info: [die, id, playerBankLength],
   });
 }
 
@@ -231,9 +248,7 @@ socket.on("moveDieReturn", function (data) {
   let die  =info[0];
   let id = info[1];
   let playerBankLength = info[2];
-  const playerBanks = [bankLeft, bankRight];
   let bank = playerBanks[turn];
-  //console.log(bank);
   let bankMiddlePics = bankMiddle.querySelectorAll("img");
   bankMiddlePics[id].setAttribute("src", "https://i.ibb.co/gvGMJqW/blueDice.jpg");
   bankImg = bank.querySelectorAll("img");
@@ -247,7 +262,22 @@ function entireGo() {
   let die=diceArray.find(die => die.img===image);
   playerBank.push(die); 
   playerBankLength = playerBank.length-1;
-  moveDie(turn,die,diceId,playerBankLength);
+  moveDie(die,diceId,playerBankLength);
 }
 
+const moveTile = (tile, id) => {
+  socket.emit("moveTile", {
+    info: [tile, id],
+  });
+}
 
+socket.on("moveTileReturn", function (data) {
+  let info = data.info;
+  let tile = info[0];
+  let id = info[1];
+  let topTilesPics=topTiles.querySelectorAll("img");
+  topTilesPics[id].setAttribute("src","https://i.ibb.co/Cw6ySLH/blue.png")
+  let pile=playerPiles[turn];
+  pile=pile.querySelectorAll("img");
+  pile[0].setAttribute("src",tile.img);
+})

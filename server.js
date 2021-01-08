@@ -10,7 +10,7 @@ app.get("/", function (req, res) {
 
 app.use("/client", express.static(__dirname + "/client"));
 
-serv.listen(process.env.PORT);
+serv.listen(1800);
 console.log("server started");
 
 const io = require("socket.io")(serv, {});
@@ -29,10 +29,14 @@ io.on("connection", (socket) => {
   })
 
   socket.on("moveDie", function (data) {
-    console.log("recieved moveDie");
-    var info = data.info;
     io.emit("moveDieReturn", {
-      info:info,
+      info: data.info,
+    })
+  });
+
+  socket.on("moveTile", function (data) {
+    io.emit("moveTileReturn", {
+      info: data.info,
     })
   })
 });
