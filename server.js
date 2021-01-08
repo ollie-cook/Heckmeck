@@ -10,7 +10,7 @@ app.get("/", function (req, res) {
 
 app.use("/client", express.static(__dirname + "/client"));
 
-serv.listen(1800);
+serv.listen(process.env.PORT);
 console.log("server started");
 
 const io = require("socket.io")(serv, {});
@@ -38,5 +38,9 @@ io.on("connection", (socket) => {
     io.emit("moveTileReturn", {
       info: data.info,
     })
+  })
+
+  socket.on("blueDice", function() {
+    io.emit("blueDiceReturn",{})
   })
 });
