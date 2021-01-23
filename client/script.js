@@ -159,6 +159,7 @@ const createPiles = (pile) => {
   pilePic.appendChild(pic);
   pic.setAttribute("src", "https://i.ibb.co/Cw6ySLH/blue.png")
   pic.setAttribute("class","pile");
+  pic.addEventListener("click", clickPile)
 }
 
 //Calls createPiles for both players piles. 
@@ -170,7 +171,11 @@ for(let i=0;i<2;i++) {
 
 const socket = io();
 let playerBank = [];
+let playerOnePile = [];
+let playerTwoPile = []; 
+let pileOneTwo = [playerOnePile,playerTwoPile];
 let turn=0; 
+let b=0;
 
 const diceArray = [
     {
@@ -216,9 +221,10 @@ const diceArray = [
       position: 5,
     },
   ];
-
+ 
 //Displays d images of random dice in the middle bank.
-const roll = (d) => {
+const roll = () => {
+    let d = 8-b;
     let currentDice = [];
     for(let i=0; i<d;i++){
       let m=Math.floor(Math.random()*6);
@@ -233,6 +239,9 @@ const roll = (d) => {
 socket.on("rollreturn", function (data) {
   let currentDiceReturn = data.currentDiceReturn;
   let bankMiddlePics = bankMiddle.querySelectorAll("img");
+  bankMiddlePics.forEach(pic => {
+    pic.setAttribute("src", "https://i.ibb.co/gvGMJqW/blueDice.jpg");
+  })
   let i=0;
   currentDiceReturn.forEach(dice => {
   bankMiddlePics[i].setAttribute("src",dice.img)
@@ -243,6 +252,7 @@ socket.on("rollreturn", function (data) {
 //emits data of die to move and where to move it to, to node server.
 const moveDie = (die, id) => {
   playerBank.push(die);
+  b++;
   socket.emit("moveDie", {
     info: [die, id, playerBank],
   });
@@ -261,7 +271,6 @@ socket.on("moveDieReturn", function (data) {
   bankImg = bank.querySelectorAll("img");
   bankImg[playerBankLength].setAttribute("src",die.img);
   let score = scores[turn];
-  console.log(playerBank)
   let bankNumbers = playerBank.map(die => {
     return die.number;
   })
@@ -295,7 +304,9 @@ socket.on("moveTileReturn", function (data) {
   topTilesPics[id].setAttribute("src","https://i.ibb.co/Cw6ySLH/blue.png")
   let pile=playerPiles[turn];
   pile=pile.querySelectorAll("img");
-  pile[0].setAttribute("src",tile.img);
+  pile[0].setAttribute("src",tile.img); 
+  pileOneTwo[turn].unshift(tile);
+  console.log(pileOneTwo[turn]);
 })
 
 //Runs when user clicks on tile. Gets data of tile clicked and feeds it into moveTile.
@@ -314,23 +325,47 @@ const changeTurn = turnCheck => {
   } else {
     turn = 0;
   }
-  playerBank = [];
-  socket.emit("blueDice", {})
+  //playerBank = [];
+  socket.emit("blueDice", {
+    turn: turn
+  })
 }
 
 //Sets all images of dice to blue.
-socket.on("blueDiceReturn", function() {
+socket.on("blueDiceReturn", function(data) {
+  let turnReturn = data.turn;
+  turn = turnReturn;
+  playerBank=[];
+  let score = scores[Math.abs(turn-1)]; 
+  score.innerHTML = 0;
   banks.forEach(bank => {
     let bankPics = bank.querySelectorAll("img");
     bankPics.forEach(pic => {
       pic.setAttribute("src", "https://i.ibb.co/gvGMJqW/blueDice.jpg");
     })
 })
+  b=0;
+}) 
 
+function clickPile() {
+  console.log("hello")
+  let topTile = pileOneTwo[turn][0];
+  socket.emit("returnTile", { 
+    topTile: topTile,
+  })
+} 
 
-
-  /*let bankMiddlePics = bankMiddle.querySelectorAll("img");
-  bankMiddlePics.forEach(pic => {
-    pic.setAttribute("src", "https://i.ibb.co/gvGMJqW/blueDice.jpg")
-  })*/
+socket.on("returnTileReturn", function(data) {
+  let topTile = data.topTile;
+  let topTilesImgs = topTiles.querySelectorAll('img');
+  topTilesImgs[topTile.position].setAttribute("src",topTile.img);
+  pileOneTwo[turn].shift(); 
+  let pile=playerPiles[turn];
+  pile=pile.querySelectorAll("img");
+  if(pileOneTwo[turn].length){
+    pile[0].setAttribute("src",pileOneTwo[turn][0].img);
+  } else {
+    pile[0].setAttribute("src","https://i.ibb.co/Cw6ySLH/blue.png");
+  }
 })
+
